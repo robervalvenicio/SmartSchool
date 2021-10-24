@@ -74,9 +74,7 @@ namespace SmartSchool.API.Controllers
             }
             _context.Update(aluno);
             _context.SaveChanges();
-
             return Ok(aluno);
-
         }
 
         [HttpPatch("{id}")]
