@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using SmartSchool.API.Data;
 using SmartSchool.API.Models;
 using System;
@@ -65,7 +66,8 @@ namespace SmartSchool.API.Controllers
         [HttpPut("{id}")]
         public IActionResult Put(int id, Aluno aluno)
         {
-            var alu = _context.Alunos.FirstOrDefault(a => a.Id == id);
+            //AsNoTracking é utilizado para não travar o banco com a consulta
+            var alu = _context.Alunos.AsNoTracking().FirstOrDefault(a => a.Id == id);
             if (alu == null)
             {
                 return BadRequest("Aluno não encontrado");
@@ -80,7 +82,7 @@ namespace SmartSchool.API.Controllers
         [HttpPatch("{id}")]
         public IActionResult Patch(int id, Aluno aluno)
         {
-            var alu = _context.Alunos.FirstOrDefault(a => a.Id == id);
+            var alu = _context.Alunos.AsNoTracking().FirstOrDefault(a => a.Id == id);
             if (alu == null)
             {
                 return BadRequest("Aluno não encontrado");
